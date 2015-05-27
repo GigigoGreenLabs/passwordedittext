@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="ShowHidePasswordView">
+        <attr name="show_type" format="enum">
+            <enum name="on_click" value="0"/>
+            <enum name="on_long_press" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
