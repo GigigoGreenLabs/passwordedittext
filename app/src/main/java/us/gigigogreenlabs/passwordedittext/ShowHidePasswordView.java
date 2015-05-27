@@ -23,19 +23,16 @@ public class ShowHidePasswordView  extends EditText{
 
     public ShowHidePasswordView(Context context) {
         this(context, null);
-
     }
 
     public ShowHidePasswordView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initComponent(attrs);
-
     }
 
     public ShowHidePasswordView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initComponent(attrs);
-
     }
 
     private void initComponent(AttributeSet attrs) {
