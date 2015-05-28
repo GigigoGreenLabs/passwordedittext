@@ -17,8 +17,8 @@ public class ShowHidePasswordView  extends EditText{
 
     private static final int SHOW_TYPE_ON_CLICK = 0;
     private static final int SHOW_TYPE_LONG_PRESS = 1;
-    private int imgNotSecure = android.R.drawable.ic_secure;
-    private int imgSecure = android.R.drawable.ic_partial_secure;
+    private int imgNotSecure = android.R.drawable.ic_partial_secure;
+    private int imgSecure = android.R.drawable.ic_secure;
 
     private boolean clicable;
     private boolean visible;
