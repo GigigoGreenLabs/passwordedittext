@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -18,6 +17,9 @@ public class ShowHidePasswordView  extends EditText{
 
     private static final int SHOW_TYPE_ON_CLICK = 0;
     private static final int SHOW_TYPE_LONG_PRESS = 1;
+    private int imgNotSecure = android.R.drawable.ic_secure;
+    private int imgSecure = android.R.drawable.ic_partial_secure;
+
     private boolean clicable;
     private boolean visible;
 
@@ -42,14 +44,16 @@ public class ShowHidePasswordView  extends EditText{
         performHidePassword();
     }
 
-
     private void initView(){
-        //this.setTransformationMethod(new PasswordTransformationMethod());
-       // this.setCompoundDrawablesWithIntrinsicBounds(0, 0, android.R.drawable.ic_secure, 0); //icon (left, up, right, down)
         this.setInputType(EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS);//No suggestions.
 
     }
 
+    public void setImageResourceForLock(int resIdUnlocked, int resIdLocked){
+        imgNotSecure = resIdUnlocked;
+        imgSecure = resIdLocked;
+        performHidePassword();
+    }
 
     private void loadAttributes(AttributeSet attrs) {
         if( attrs!= null) {
@@ -62,21 +66,9 @@ public class ShowHidePasswordView  extends EditText{
         }
     }
 
-
-
-
-
-
     private void setListeners() {
         this.setOnTouchListener(onTouchListener);
     }
-
-
-
-
-
-
-
 
     OnTouchListener onTouchListener = new OnTouchListener() {
         @Override
@@ -103,13 +95,11 @@ public class ShowHidePasswordView  extends EditText{
 
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     if (event.getRawX() >= (ShowHidePasswordView.this.getRight() - ShowHidePasswordView.this.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        Log.d("jmmt", "pulsoooo");
                         performShowPassword();
                         return true;
                     }
                 } else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_MOVE) {
                     if (event.getRawX() >= (ShowHidePasswordView.this.getRight() - ShowHidePasswordView.this.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        Log.d("jmmt", "sueltooo");
                         performHidePassword();
                         return true;
                     }
@@ -120,27 +110,16 @@ public class ShowHidePasswordView  extends EditText{
 
     };
 
-
-
-
-
-
-
-
-
     private void performHidePassword() {
-        this.setCompoundDrawablesWithIntrinsicBounds(0, 0, android.R.drawable.ic_secure, 0);
+        this.setCompoundDrawablesWithIntrinsicBounds(0, 0, imgSecure, 0);
         this.setTransformationMethod(new PasswordTransformationMethod());
         this.setSelection(this.getText().length());
     }
 
-
-
     private void performShowPassword() {
-        this.setCompoundDrawablesWithIntrinsicBounds(0, 0, android.R.drawable.ic_partial_secure, 0);
+        this.setCompoundDrawablesWithIntrinsicBounds(0, 0, imgNotSecure, 0);
         this.setTransformationMethod(null);
         this.setSelection(this.getText().length());
     }
-
 
 }
